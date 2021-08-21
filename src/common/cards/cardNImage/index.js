@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 })
 
-export default function CardNImage() {
+export default function CardNImage({title,content}) {
   const classes = useStyles()
   const [openAlertDelete,setOpenAlertDelete] = useState(false)
   const [openEdit, setOpenEdit] = useState(false)
@@ -40,11 +40,10 @@ export default function CardNImage() {
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant='h5' component='h2'>
-            Lizard
+            {title}
           </Typography>
           <Typography variant='body2' color='textSecondary' component='p'>
-            Lizards are a widespread group of squame reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {content}
           </Typography>
         </CardContent>
       </CardActionArea>
