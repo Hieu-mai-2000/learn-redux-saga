@@ -9,6 +9,8 @@ import DialogInput from '../../common/dialogs/dialogInput/dialogInput'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as taskAction from '../../actions/task'
+import Loading from '../../common/GlobalLoading/loading'
+import InputSearch from '../../common/input/inputSearch/inputSearch'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,14 +34,15 @@ function TodoTasks(props) {
 
   useEffect(() => {
     const { taskActionCreator } = props
-    const { fetchTasks } = taskActionCreator
-    fetchTasks()
+    const { fetchTask } = taskActionCreator
+    fetchTask()
   }, [])
 
   return (
     <React.Fragment>
       <CssBaseline />
       <DialogInput isOpen={isDialogCreate} handleEdit={handleCreate} />
+      <Loading/>
       <Container fixed>
         <div className={classes.root}>
           <Button
@@ -48,15 +51,15 @@ function TodoTasks(props) {
             onClick={() => handleCreate(true)}>
             Create
           </Button>
-
+<InputSearch/>
           <Grid container spacing={3}>
             <Grid item xs>
               <h1>TODO</h1>
-              {listTask.map((task) => {
+              {listTask.map((task,index) => {
                 if (task.state % 3 === 0) {
                   return (
                     <Box mt={1}>
-                      <CardNImage title={task.title} content={task.content} />
+                      <CardNImage key={index} title={task.title} content={task.content} />
                     </Box>
                   )
                 }
@@ -65,11 +68,11 @@ function TodoTasks(props) {
             </Grid>
             <Grid item xs>
               <h1>DOING</h1>
-              {listTask.map((task) => {
+              {listTask.map((task,index) => {
                 if (task.state % 3 === 1) {
                   return (
                     <Box mt={1}>
-                      <CardNImage title={task.title} content={task.content} />
+                      <CardNImage key={index} title={task.title} content={task.content} />
                     </Box>
                   )
                 }
@@ -78,11 +81,11 @@ function TodoTasks(props) {
             </Grid>
             <Grid item xs>
               <h1>DONE</h1>
-              {listTask.map((task) => {
+              {listTask.map((task,index) => {
                 if (task.state % 3 === 2) {
                   return (
                     <Box mt={1}>
-                      <CardNImage title={task.title} content={task.content} />
+                      <CardNImage key={index} title={task.title} content={task.content} />
                     </Box>
                   )
                 }

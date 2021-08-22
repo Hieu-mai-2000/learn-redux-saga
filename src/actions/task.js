@@ -1,12 +1,12 @@
 import { getAll } from '../apis/task'
 import * as taskConstant from '../constants/task'
 
-const fetchTask = () => {
+export const fetchTask = () => {
   return {
     type: taskConstant.FETCH_TASK,
   }
 }
-const fetchTaskSuccess = (data) => {
+export const fetchTaskSuccess = (data) => {
   return {
     type: taskConstant.FETCH_TASK_SUCCESS,
     payload: {
@@ -14,7 +14,7 @@ const fetchTaskSuccess = (data) => {
     },
   }
 }
-const fetchTaskFailed = (error) => {
+export const fetchTaskFailed = (error) => {
   return {
     type: taskConstant.FETCH_TASK_FAILED,
     payload: {
@@ -23,14 +23,14 @@ const fetchTaskFailed = (error) => {
   }
 }
 
-export const fetchTasks = () => {
-  return (dispatch) => {
-    dispatch(fetchTask())
-    getAll()
-      .then((response) => {
-        const { data } = response
-        dispatch(fetchTaskSuccess(data))
-      })
-      .catch((error) => dispatch(fetchTaskFailed(error)))
-  }
-}
+// export const fetchTasks = () => {
+//   return (dispatch) => {
+//     dispatch(fetchTask())
+//     getAll()
+//       .then((response) => {
+//         const { data } = response
+//         dispatch(fetchTaskSuccess(data))
+//       })
+//       .catch((error) => dispatch(fetchTaskFailed(error)))
+//   }
+// }
